@@ -44,4 +44,10 @@ describe('String Calculator', () => {
 		// Takes a string with line break and calculates
 		expect(Add('2,2\n2\n2')).toEqual(8);
 	});
+
+	it('handles different delimiter', () => {
+		expect(Add('//:\n:3')).toEqual(4);
+		expect(Add('//|\n1|2|3')).toEqual(6);
+		expect(Add('//sep\n2sep5')).toEqual(7);
+	});
 });
