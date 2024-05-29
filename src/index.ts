@@ -30,7 +30,13 @@ const Add = (n: string): number => {
 
 		const sumPerLine = lines.map((line: string) => {
 			const splitValues = line.split(delimiter ? delimiter : ',');
+			// console.log('split vals', splitValues);
 			const valToNum = splitValues.map(Number);
+			const filteredNums = valToNum.filter((n) => {
+				return !Number.isNaN(n);
+			});
+
+			console.log('filtered', filteredNums);
 
 			const addValues = valToNum.reduce(
 				(prevValue: number, currentValue: number) => prevValue + currentValue,
@@ -46,12 +52,12 @@ const Add = (n: string): number => {
 
 		result = totalSum;
 	}
-	console.log(result);
+	console.log('result', result);
 	return result;
 };
 
 Add('1,2,6'); // 9
 Add('2\n4,4'); // 10
-Add('//:\n:3'); // 4
+Add('//:\n1:3'); // 4
 
 export { wildFlower, Add };
