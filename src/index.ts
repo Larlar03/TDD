@@ -24,9 +24,9 @@ const Add = (n: string): number => {
 	} else if (n.length === 1) {
 		result = Number(n);
 	} else {
-		// const delimiter = n.slice(0, 2) === '//' ? n.slice(2, 3) : null;
-		const delimiter = n.split('\n')[0].slice(2);
-		console.log(delimiter);
+		const delimiter =
+			n.split('\n')[0].slice(0, 2) === '//' ? n.split('\n')[0].slice(2) : null;
+		console.log('delimiter', delimiter);
 		const lines = n.split('\n');
 
 		const sumPerLine = lines.map((line: string) => {
