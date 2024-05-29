@@ -25,18 +25,13 @@ const Add = (n: string): number => {
 		result = Number(n);
 	} else {
 		const delimiter = n.slice(0, 2) === '//' ? n.slice(2, 3) : null;
-		console.log(delimiter);
 		const lines = n.split('\n');
 
 		const sumPerLine = lines.map((line: string) => {
 			const splitValues = line.split(delimiter ? delimiter : ',');
-			// console.log('split vals', splitValues);
-			const valToNum = splitValues.map(Number);
-			const filteredNums = valToNum.filter((n) => {
+			const valToNum = splitValues.map(Number).filter((n) => {
 				return !Number.isNaN(n);
 			});
-
-			console.log('filtered', filteredNums);
 
 			const addValues = valToNum.reduce(
 				(prevValue: number, currentValue: number) => prevValue + currentValue,
