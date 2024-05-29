@@ -24,13 +24,15 @@ const Add = (n: string) => {
 	} else if (n.length === 1) {
 		result = Number(n);
 	} else {
+		const delimiter = n.slice(0, 2) === '//' ? n.slice(2, 3) : null;
+		console.log(delimiter);
 		const lines = n.split('\n');
 
 		const sumPerLine = lines.map((line: string) => {
 			const splitValues = line.split(',');
-			const splitNumbers = splitValues.map(Number);
+			const valToNum = splitValues.map(Number);
 
-			const addValues = splitNumbers.reduce(
+			const addValues = valToNum.reduce(
 				(prevValue: number, currentValue: number) => prevValue + currentValue,
 				0
 			);
@@ -41,9 +43,15 @@ const Add = (n: string) => {
 			(prevValue: number, currentValue: number) => prevValue + currentValue,
 			0
 		);
+
 		result = totalSum;
 	}
+	console.log(result);
 	return result;
 };
+
+Add('1,2,6'); // 9
+Add('2\n4,4'); // 10
+Add('//:\n:3'); // 4
 
 export { wildFlower, Add };
