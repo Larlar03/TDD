@@ -34,20 +34,24 @@ describe('String Calculator', () => {
 	});
 
 	it('returns the total of multiple values across a line break', () => {
-		// Takes a string with line break and calculates
 		expect(Add('1,2\n3')).toEqual(6);
 		expect(Add('1,1\n1,1')).toEqual(4);
 		expect(Add('2\n4,4')).toEqual(10);
 	});
 
 	it('returns the total of multiple values across multiple line breaks', () => {
-		// Takes a string with line break and calculates
 		expect(Add('2,2\n2\n2')).toEqual(8);
 	});
 
-	it('handles different delimiter', () => {
+	it('handles different delimiters', () => {
 		expect(Add('//:\n1:3')).toEqual(4);
 		expect(Add('//|\n1|2|3')).toEqual(6);
 		expect(Add('//sep\n2sep5')).toEqual(7);
+	});
+
+	it('throws an error if it finds a different delimiter', () => {
+		expect(Add('//|\n1|2,3')).toThrow(
+			new Error('"|" expected but "," found at position 3.')
+		);
 	});
 });
