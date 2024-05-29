@@ -46,7 +46,7 @@ describe('String Calculator', () => {
 	});
 
 	it('handles different delimiter', () => {
-		expect(Add('//:\n:3')).toEqual(4);
+		expect(Add('//:\n1:3')).toEqual(4);
 		expect(Add('//|\n1|2|3')).toEqual(6);
 		expect(Add('//sep\n2sep5')).toEqual(7);
 	});

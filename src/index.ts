@@ -26,7 +26,6 @@ const Add = (n: string): number => {
 	} else {
 		const delimiter =
 			n.split('\n')[0].slice(0, 2) === '//' ? n.split('\n')[0].slice(2) : null;
-		console.log('delimiter', delimiter);
 		const lines = n.split('\n');
 
 		const sumPerLine = lines.map((line: string) => {
@@ -52,9 +51,5 @@ const Add = (n: string): number => {
 	console.log('result', result);
 	return result;
 };
-
-Add('1,2,6'); // 9
-Add('2\n4,4'); // 10
-Add('//:\n1:3'); // 4
 
 export { wildFlower, Add };
