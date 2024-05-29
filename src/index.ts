@@ -16,7 +16,7 @@ const wildFlower = (n: number) => {
 };
 
 // https://tddmanifesto.com/exercises/
-const Add = (n: string) => {
+const Add = (n: string): number => {
 	let result: number = 0;
 
 	if (!n) {
@@ -29,7 +29,7 @@ const Add = (n: string) => {
 		const lines = n.split('\n');
 
 		const sumPerLine = lines.map((line: string) => {
-			const splitValues = line.split(',');
+			const splitValues = line.split(delimiter ? delimiter : ',');
 			const valToNum = splitValues.map(Number);
 
 			const addValues = valToNum.reduce(
