@@ -15,32 +15,34 @@ const wildFlower = (n: number) => {
 	return result.toString();
 };
 
-const findInvalidCharacter = (input: string, delimiter: string) => {
+const findInvalidCharacterInString = (text: string, delimiter: string) => {
 	const escapedDelimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const invalidCharPattern = new RegExp(`[^\\d${escapedDelimiter}]`);
-	return input.match(invalidCharPattern);
+	return text.match(invalidCharPattern);
 };
 
 // https://tddmanifesto.com/exercises/
-const Add = (n: string): number => {
+const Add = (input: string): number => {
 	let result: number = 0;
 
-	if (!n) {
+	if (!input) {
 		return result;
-	} else if (n.length === 1) {
-		result = Number(n);
+	} else if (input.length === 1) {
+		result = Number(input);
 	} else {
-		const lines = n.split('\n');
-		const delimiter = n.startsWith('//') ? n.split('\n')[0].slice(2) : null;
+		const lines = input.split('\n');
+		// Extract delimiter from between  \\ and \n
+		const delimiter = input.startsWith('//')
+			? input.split('\n')[0].slice(2)
+			: null;
 
-		if (delimiter) {
-			const isInvalid = findInvalidCharacter(lines[1], delimiter);
+		const isInvalid =
+			delimiter && findInvalidCharacterInString(lines[1], delimiter);
 
-			if (isInvalid) {
-				throw new Error(
-					`"${delimiter}" expected but "${isInvalid[0]}" found at position ${isInvalid.index}.`
-				);
-			}
+		if (isInvalid) {
+			throw new Error(
+				`"${delimiter}" expected but "${isInvalid[0]}" found at position ${isInvalid.index}.`
+			);
 		}
 
 		const sumPerLine = lines.map((line: string) => {
