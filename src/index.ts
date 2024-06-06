@@ -15,7 +15,10 @@ const wildFlower = (n: number) => {
 	return result.toString();
 };
 
-const findInvalidCharacterInString = (text: string, delimiter: string) => {
+const findInvalidCharacterInString = (
+	text: string,
+	delimiter: string
+): RegExpMatchArray | null => {
 	const escapedDelimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const invalidCharPattern = new RegExp(`[^\\d${escapedDelimiter}]`);
 	return text.match(invalidCharPattern);
