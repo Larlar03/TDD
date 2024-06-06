@@ -24,9 +24,13 @@ const Add = (n: string): number => {
 	} else if (n.length === 1) {
 		result = Number(n);
 	} else {
-		const delimiter =
-			n.split('\n')[0].slice(0, 2) === '//' ? n.split('\n')[0].slice(2) : null;
+		const delimiter = n.startsWith('//') ? n.split('\n')[0].slice(2) : null;
 		const lines = n.split('\n');
+
+		// Find char that isn't | or a number
+		const invalidCharPattern = /[^0-9|]/;
+		const match = lines[1].match(invalidCharPattern);
+		console.log('invalid', match);
 
 		const sumPerLine = lines.map((line: string) => {
 			const splitValues = line.split(delimiter ? delimiter : ',');
@@ -51,5 +55,7 @@ const Add = (n: string): number => {
 	console.log('result', result);
 	return result;
 };
+
+Add('//|\n1|2,3');
 
 export { wildFlower, Add };
