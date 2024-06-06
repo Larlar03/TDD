@@ -54,4 +54,8 @@ describe('String Calculator', () => {
 			Add('//|\n1|2,3');
 		}).toThrow('"|" expected but "," found at position 3.');
 	});
+
+	it('returns a message rejecting negative numbers', () => {});
 });
+
+describe('Password Input Field Validation', () => {});

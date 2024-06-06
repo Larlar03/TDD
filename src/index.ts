@@ -54,11 +54,11 @@ const Add = (input: string): number => {
 				return !Number.isNaN(n);
 			});
 
-			const addValues = valToNum.reduce(
+			const valSum = valToNum.reduce(
 				(prevValue: number, currentValue: number) => prevValue + currentValue,
 				0
 			);
-			return addValues;
+			return valSum;
 		});
 
 		const totalSum = sumPerLine.reduce(
@@ -71,5 +71,5 @@ const Add = (input: string): number => {
 	// console.log('result', result);
 	return result;
 };
-// Add('//|\n1|2,3');
+
 export { wildFlower, Add };
