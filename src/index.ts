@@ -24,19 +24,21 @@ const Add = (n: string): number => {
 	} else if (n.length === 1) {
 		result = Number(n);
 	} else {
-		const delimiter = n.startsWith('//') ? n.split('\n')[0].slice(2) : null;
 		const lines = n.split('\n');
+		const delimiter = n.startsWith('//') ? n.split('\n')[0].slice(2) : null;
 
-		// Find char that isn't | or a number
-		const invalidCharPattern = /[^0-9|]/;
-		const match = lines[1].match(invalidCharPattern);
+		if (delimiter) {
+			const escapedDelimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+			const invalidCharPattern = new RegExp(`[^\\d${escapedDelimiter}]`);
+			const isInvalid = lines[1].match(invalidCharPattern);
 
-		if (match) {
-			const invalidCharPosition = match && match.index;
-			const invalidChar = match && match[0];
-			throw new Error(
-				`"${delimiter}" expected but "${invalidChar}" found at position ${invalidCharPosition}.`
-			);
+			if (isInvalid) {
+				const invalidCharPosition = isInvalid.index;
+				const invalidChar = isInvalid[0];
+				throw new Error(
+					`"${delimiter}" expected but "${invalidChar}" found at position ${invalidCharPosition}.`
+				);
+			}
 		}
 
 		const sumPerLine = lines.map((line: string) => {
@@ -62,7 +64,5 @@ const Add = (n: string): number => {
 	// console.log('result', result);
 	return result;
 };
-
-Add('//|\n1|2,3');
 
 export { wildFlower, Add };

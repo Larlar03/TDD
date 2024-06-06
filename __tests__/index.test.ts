@@ -50,8 +50,8 @@ describe('String Calculator', () => {
 	});
 
 	it('throws an error if it finds a different delimiter', () => {
-		expect(Add('//|\n1|2,3')).toThrow(
-			new Error('"|" expected but "," found at position 3.')
-		);
+		expect(() => {
+			Add('//|\n1|2,3');
+		}).toThrow('"|" expected but "," found at position 3.');
 	});
 });
