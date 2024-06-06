@@ -15,6 +15,12 @@ const wildFlower = (n: number) => {
 	return result.toString();
 };
 
+const findInvalidCharacter = (input: string, delimiter: string) => {
+	const escapedDelimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	const invalidCharPattern = new RegExp(`[^\\d${escapedDelimiter}]`);
+	return input.match(invalidCharPattern);
+};
+
 // https://tddmanifesto.com/exercises/
 const Add = (n: string): number => {
 	let result: number = 0;
@@ -28,15 +34,11 @@ const Add = (n: string): number => {
 		const delimiter = n.startsWith('//') ? n.split('\n')[0].slice(2) : null;
 
 		if (delimiter) {
-			const escapedDelimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-			const invalidCharPattern = new RegExp(`[^\\d${escapedDelimiter}]`);
-			const isInvalid = lines[1].match(invalidCharPattern);
+			const isInvalid = findInvalidCharacter(lines[1], delimiter);
 
 			if (isInvalid) {
-				const invalidCharPosition = isInvalid.index;
-				const invalidChar = isInvalid[0];
 				throw new Error(
-					`"${delimiter}" expected but "${invalidChar}" found at position ${invalidCharPosition}.`
+					`"${delimiter}" expected but "${isInvalid[0]}" found at position ${isInvalid.index}.`
 				);
 			}
 		}
@@ -64,5 +66,5 @@ const Add = (n: string): number => {
 	// console.log('result', result);
 	return result;
 };
-
+// Add('//|\n1|2,3');
 export { wildFlower, Add };
