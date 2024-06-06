@@ -30,8 +30,14 @@ const Add = (n: string): number => {
 		// Find char that isn't | or a number
 		const invalidCharPattern = /[^0-9|]/;
 		const match = lines[1].match(invalidCharPattern);
-		const invalidCharPosition = match ? match.index : null;
-		console.log('position', invalidCharPosition);
+
+		if (match) {
+			const invalidCharPosition = match && match.index;
+			const invalidChar = match && match[0];
+			throw new Error(
+				`"${delimiter}" expected but "${invalidChar}" found at position ${invalidCharPosition}.`
+			);
+		}
 
 		const sumPerLine = lines.map((line: string) => {
 			const splitValues = line.split(delimiter ? delimiter : ',');
@@ -53,7 +59,7 @@ const Add = (n: string): number => {
 
 		result = totalSum;
 	}
-	console.log('result', result);
+	// console.log('result', result);
 	return result;
 };
 
